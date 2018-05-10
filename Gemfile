@@ -171,3 +171,15 @@ gem 'intercom'
 gem 'twitter_cldr'
 gem 'memoist'
 gem 'biz'
+
+# Additional gem
+gem 'daemons', '~> 1.2.4'
+
+# Location search
+gem 'acts_as_geocodable'
+gem 'geokit-rails'
+
+# Add fontawesome
+# gem 'font-awesome-rails'
+gem 'whenever', require: false
+
