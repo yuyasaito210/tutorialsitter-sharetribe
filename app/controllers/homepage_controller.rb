@@ -80,7 +80,7 @@ class HomepageController < ApplicationController
                                   location_search_in_use: location_in_use,
                                   keyword_search_in_use: keyword_in_use,
                                   relevant_search_fields: relevant_search_fields)
-
+        
     if @view_type == 'map'
       viewport = viewport_geometry(params[:boundingbox], params[:lc], @current_community.location)
     end
@@ -168,7 +168,7 @@ class HomepageController < ApplicationController
       include_closed: false,
       sort: nil
     }
-
+   
     if @view_type != 'map' && location_search_in_use
       search.merge!(location_search_params(params, keyword_search_in_use))
     end

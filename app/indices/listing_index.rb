@@ -15,8 +15,10 @@ if APP_CONFIG.use_thinking_sphinx_indexing.to_s.casecmp("true") == 0
     indexes description
     indexes custom_field_values(:text_value), :as => :custom_text_fields
     indexes origin_loc.google_address
+    indexes author.family_name
+    indexes author.given_name author.family_name
 
-    # attributes
+   # attributes
     has id, :as => :listing_id # id didn't work without :as aliasing
     has price_cents
     has created_at, updated_at
@@ -26,7 +28,8 @@ if APP_CONFIG.use_thinking_sphinx_indexing.to_s.casecmp("true") == 0
     has community_id
     has custom_dropdown_field_values.selected_options.id, :as => :custom_dropdown_field_options, :type => :integer, :multi => true
     has custom_checkbox_field_values.selected_options.id, :as => :custom_checkbox_field_options, :type => :integer, :multi => true
-
+    has author_id
+    
     set_property :enable_star => true
 
     set_property :field_weights => {

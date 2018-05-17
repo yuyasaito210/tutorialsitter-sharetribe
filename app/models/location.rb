@@ -13,7 +13,15 @@
 #  person_id      :string(255)
 #  location_type  :string(255)
 #  community_id   :integer
+#  delta          :boolean
 #
+# Indexes
+#
+#  index_locations_on_community_id  (community_id)
+#  index_locations_on_listing_id    (listing_id)
+#  index_locations_on_person_id     (person_id)
+#
+
 # Indexes
 #
 #  index_locations_on_community_id  (community_id)
@@ -26,6 +34,13 @@ class Location < ApplicationRecord
   belongs_to :person
   belongs_to :listing
   belongs_to :community
+
+
+  acts_as_mappable :default_units => :miles,
+               :default_formula => :sphere,
+               :distance_field_name => :distance,
+               :lat_column_name => :latitude,
+               :lng_column_name => :longitude
 
   def search_and_fill_latlng(address=nil, locale=APP_CONFIG.default_locale)
     okresponse = false
