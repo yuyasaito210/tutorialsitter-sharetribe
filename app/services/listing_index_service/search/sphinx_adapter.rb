@@ -88,8 +88,7 @@ module ListingIndexService::Search
                 listing_shape_id: search[:listing_shape_id],
                 price_cents: search[:price_cents],
                 listing_id: listing_location_joins.ids,
-              })
-          
+              })          
             models = Listing.search(
               Riddle::Query.escape(search[:keywords] || ""),
               sql: {
@@ -104,13 +103,14 @@ module ListingIndexService::Search
               max_query_time: 1000 # Timeout and fail after 1s
             )
           end
+          
         elsif search[:keywords] == nil && search[:latitude] != nil && search[:longitude] != nil
                     
           models = Listing.search
           models.clear;
 
           locations = Location.within(
-            search[:distance_max] || search[:distance_unit] == :km ? 800 : 1287.4752,
+            search[:distance_max] || search[:distance_unit] == :km ? 3.10686 : 5,
             :origin => [search[:latitude], search[:longitude]],
             :order => 'distance').limit(search[:per_page])
 
