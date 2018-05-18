@@ -45,8 +45,8 @@ const searchPageShadow = '0 2px 3px 0 rgba(0, 0, 0, 0.1)';
 // With minimum z-index we try to avoid most clashes with rails components
 const zIndexMinimum = 5;
 
-const searchBarNarrowWidth = 326;
-const searchBarWidth = 396;
+const searchBarNarrowWidth = 780;
+const searchBarWidth = 800;
 
 const pxToEms = function pxToEms(px, againstFontSize) {
   const emValue = px / againstFontSize;

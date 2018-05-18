@@ -82,7 +82,7 @@ module ListingIndexService::Search
           models = Listing.search
           models.clear;
           locations = Location.within(
-            search[:distance_max] || search[:distance_unit] == :km ? 3.10686 : 5,
+            search[:distance_max] || search[:distance_unit] == :km ? 800 : 1287.4752,
             :origin => [search[:latitude], search[:longitude]],
             :order => 'distance').limit(search[:per_page])
           locations.each_with_index do |location, index|
@@ -105,7 +105,10 @@ module ListingIndexService::Search
         end
 
         begin
-          DatabaseSearchHelper.success_result(models.total_entries, models, includes)
+          if !models[models.size - 1].present?
+            models.delete_at(models.size - 1)
+          end
+          DatabaseSearchHelper.success_result(models.size, models, includes)
         rescue ThinkingSphinx::SphinxError => e
           Result::Error.new(e)
         end

@@ -1287,7 +1287,7 @@ en:
     grid_item:
       processing_uploaded_image: "(Processing uploaded image...)"
     index:
-      no_listings_with_your_search_criteria: "Sorry, no listings could be found for your search criteria. Maybe try other search terms?"
+      no_listings_with_your_search_criteria: "Your search didn't result in any matches"
       no_listings_notification: "No listings. %{add_listing_link}."
       add_listing_link_text: "Add new listing"
       open_listing: "open listing"
