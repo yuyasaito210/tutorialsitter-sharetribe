@@ -61,15 +61,6 @@ module ListingIndexService::Search
         DatabaseSearchHelper.success_result(0, [], nil)
       else
 
-        with = HashUtils.compact(
-          {
-            community_id: community_id,
-            category_id: search[:categories], # array of accepted ids
-            listing_shape_id: search[:listing_shape_id],
-            price_cents: search[:price_cents],
-            listing_id: numeric_search_match_listing_ids,
-          })
-
         selection_groups = search[:fields].select { |v| v[:type] == :selection_group }
         grouped_by_operator = selection_groups.group_by { |v| v[:operator] }
 
@@ -78,17 +69,66 @@ module ListingIndexService::Search
           custom_checkbox_field_options: (grouped_by_operator[:and] || []).flat_map { |v| v[:value] },
         }
        
-        if search[:keywords] == nil || search[:latitude] != nil && search[:longitude] != nil
+        if search[:keywords] != nil && search[:latitude] != nil && search[:longitude] != nil
+      
+          locations = Location.within(
+            search[:distance_max] || search[:distance_unit] == :km ? 3.10686 : 5,
+            :origin => [search[:latitude], search[:longitude]],
+            :order => 'distance').limit(search[:per_page])
+          
+          listing_location_joins = Listing.joins(:location).where(locations: { id: locations.ids })
+
+          if listing_location_joins.size == 0
+            models = []
+          else 
+            with = HashUtils.compact(
+              {
+                community_id: community_id,
+                category_id: search[:categories], # array of accepted ids
+                listing_shape_id: search[:listing_shape_id],
+                price_cents: search[:price_cents],
+                listing_id: listing_location_joins.ids,
+              })
+          
+            models = Listing.search(
+              Riddle::Query.escape(search[:keywords] || ""),
+              sql: {
+                include: included_models
+              },
+              page: search[:page],
+              per_page: search[:per_page],
+              star: true,
+              with: with,
+              with_all: with_all,
+              order: 'sort_date DESC',
+              max_query_time: 1000 # Timeout and fail after 1s
+            )
+          end
+        elsif search[:keywords] == nil && search[:latitude] != nil && search[:longitude] != nil
+                    
           models = Listing.search
           models.clear;
+
           locations = Location.within(
             search[:distance_max] || search[:distance_unit] == :km ? 800 : 1287.4752,
             :origin => [search[:latitude], search[:longitude]],
             :order => 'distance').limit(search[:per_page])
+
           locations.each_with_index do |location, index|
             models.append location.listing
           end
+
         else
+
+          with = HashUtils.compact(
+            {
+              community_id: community_id,
+              category_id: search[:categories], # array of accepted ids
+              listing_shape_id: search[:listing_shape_id],
+              price_cents: search[:price_cents],
+              listing_id: numeric_search_match_listing_ids,
+            })
+
           models = Listing.search(
             Riddle::Query.escape(search[:keywords] || ""),
             sql: {
@@ -105,8 +145,8 @@ module ListingIndexService::Search
         end
 
         begin
-          if !models[models.size - 1].present?
-            models.delete_at(models.size - 1)
+          if !models[0].present?
+            models.delete_at(0)
           end
           DatabaseSearchHelper.success_result(models.size, models, includes)
         rescue ThinkingSphinx::SphinxError => e
