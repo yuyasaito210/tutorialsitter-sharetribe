@@ -78,7 +78,7 @@ module ListingIndexService::Search
           
           listing_location_joins = Listing.joins(:location).where(locations: { id: locations.ids })
 
-          if listing_location_joins.size == 0
+          if !listing_location_joins.present?
             models = []
           else 
             with = HashUtils.compact(
