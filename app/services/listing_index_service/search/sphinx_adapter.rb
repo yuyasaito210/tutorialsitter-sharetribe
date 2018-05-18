@@ -78,7 +78,7 @@ module ListingIndexService::Search
           custom_checkbox_field_options: (grouped_by_operator[:and] || []).flat_map { |v| v[:value] },
         }
        
-        if search[:keywords] == nil && search[:latitude] != nil && search[:longitude] != nil
+        if search[:keywords] == nil || search[:latitude] != nil && search[:longitude] != nil
           models = Listing.search
           models.clear;
           locations = Location.within(
