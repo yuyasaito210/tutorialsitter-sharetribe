@@ -6,7 +6,7 @@ class SettingsController < ApplicationController
 
   before_action EnsureCanAccessPerson.new(:person_id, error_message_key: "layouts.notifications.you_are_not_authorized_to_view_this_content"), except: :unsubscribe
 
-  def show
+  def show    
     target_user = Person.find_by!(username: params[:person_id], community_id: @current_community.id)
     add_location_to_person!(target_user)
     flash.now[:notice] = t("settings.profile.image_is_processing") if target_user.image.processing?
@@ -19,7 +19,6 @@ class SettingsController < ApplicationController
     @selected_left_navi_link = "account"
     target_user.emails.build
     has_unfinished = TransactionService::Transaction.has_unfinished_transactions(target_user.id)
-
     render locals: {has_unfinished: has_unfinished, target_user: target_user}
   end
 

@@ -29,7 +29,6 @@
 #  given_name                         :string(255)
 #  family_name                        :string(255)
 #  display_name                       :string(255)
-#  phone_number                       :string(255)
 #  description                        :text(65535)
 #  image_file_name                    :string(255)
 #  image_content_type                 :string(255)
@@ -43,6 +42,20 @@
 #  deleted                            :boolean          default(FALSE)
 #  cloned_from                        :string(22)
 #  person_type                        :string(255)
+#  phone_number2                      :string(255)
+#  children_number                    :string(255)
+#  children_gender                    :string(255)
+#  children_age                       :string(255)
+#  children_need                      :string(255)
+#  phone_number1                      :string(255)
+#  grade_level                        :string(255)
+#  university_degree                  :string(255)
+#  university_name                    :string(255)
+#  arrest                             :string(255)
+#  convicted_felony                   :string(255)
+#  certificate_issue                  :datetime
+#  certificate_expiration             :datetime
+#  parent_contact_type                :string(255)
 #
 # Indexes
 #

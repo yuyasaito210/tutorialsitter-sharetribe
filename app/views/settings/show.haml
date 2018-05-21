@@ -54,12 +54,84 @@
             googlemapMarkerInit("settings_map_canvas","person_location","person_street_address", true, #{tribe_latitude}, #{tribe_longitude});
             });
 
-    -# Phone number
+    -# Phone number 1
     .inline-label-container
-      = form.label :phone_number, t("settings.profile.phone_number"), :class => "inline"
+      = form.label :phone_number1, t("settings.profile.phone_number1"), :class => "inline"
       %small
         = t('settings.profile.invisible')
-    = form.text_field :phone_number, :class => "text_field", :maxlength => "25"
+    = form.text_field :phone_number1, :class => "text_field", :maxlength => "25"
+
+    -# Phone number 2
+    .inline-label-container
+      = form.label :phone_number2, t("settings.profile.phone_number2"), :class => "inline"
+      %small
+        = t('settings.profile.invisible')
+    = form.text_field :phone_number2, :class => "text_field", :maxlength => "25"
+
+    - if target_user[:person_type] == 'parent'
+
+      -# Number of children
+      .inline-label-container
+        = form.label :children_number, t("settings.profile.children_number"), :class => "inline"
+      = form.text_field :children_number, :class => "text_field", :maxlength => "25"
+
+      -# Gender of Children
+      .inline-label-container
+        = form.label :children_gender, t("settings.profile.children_gender"), :class => "inline"
+      = form.text_field :children_gender, :class => "text_field", :maxlength => "25"
+
+      -# Ages of children
+      .inline-label-container
+        = form.label :children_age, t("settings.profile.children_age"), :class => "inline"
+      = form.text_field :children_age, :class => "text_field", :maxlength => "25"
+    
+      -# Any special needs children
+      .inline-label-container
+        = form.label :children_need, t("settings.profile.special_needs_children"), :class => "inline"
+      = form.text_field :children_need, :class => "text_field", :maxlength => "25"
+    - elsif target_user[:person_type] == 'teacher'
+      -# Current grade level
+      .inline-label-container
+        = form.label :grade_level, t("settings.profile.grade_level"), :class => "inline"
+      = form.text_field :grade_level, :class => "text_field", :maxlength => "25"
+
+      .inline-label-container
+        = form.label :certificate_issue, t("settings.profile.certificate_issue"), :class => "inline"
+      .date_select_container
+      = form.date_select :certificate_issue, :class => "inline"
+
+      .inline-label-container
+        = form.label :certificate_expiration, t("settings.profile.certificate_expiration"), :class => "inline"
+      = form.date_select :certificate_expiration, :class => "inline"
+
+      -# Degrees obtained in College 
+      .inline-label-container
+        = form.label :university_degree, t("settings.profile.university_degree"), :class => "inline"
+      = form.text_field :university_degree, :class => "text_field", :maxlength => "25"
+
+      -# University names
+      .inline-label-container
+        = form.label :university_name, t("settings.profile.university_name"), :class => "inline"
+      = form.text_field :university_name, :class => "text_field", :maxlength => "25"
+
+      -# Arrest
+      .inline-label-container
+        = form.label :arrest, t("settings.profile.arrest"), :class => "inline"
+        %small
+          = t('settings.profile.invisible')
+      = form.text_field :arrest, :class => "text_field", :maxlength => "25"
+
+      -# Convicted of a felony
+      .inline-label-container
+        = form.label :convicted_felony, t("settings.profile.convicted_felony"), :class => "inline"
+        %small
+          = t('settings.profile.invisible')
+      = form.text_field :convicted_felony, :class => "text_field", :maxlength => "25"
+
+      -# FaceTime or Skype with parents?
+      .inline-label-container
+        = form.label :parent_contact_type, t("settings.profile.parent_contact_type"), :class => "inline"
+      = form.text_field :parent_contact_type, :class => "text_field", :maxlength => "25"
 
     -# Profile picture
     = form.label :image, t("settings.profile.profile_picture")

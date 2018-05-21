@@ -1,4 +1,4 @@
-class CreateExportTaskResults < ActiveRecord::Migration[4.2]
+class CreateExportTaskResults < ActiveRecord::Migration[4.1]
   def change
     create_table :export_task_results do |t|
       t.string :status

@@ -72,7 +72,7 @@ module ListingIndexService::Search
         if search[:keywords] != nil && search[:latitude] != nil && search[:longitude] != nil
       
           locations = Location.within(
-            search[:distance_max] || search[:distance_unit] == :km ? 3.10686 : 5,
+            search[:distance_max] || search[:distance_unit] == :km ? 30 : 48.2803,
             :origin => [search[:latitude], search[:longitude]],
             :order => 'distance').limit(search[:per_page])
           
@@ -110,7 +110,7 @@ module ListingIndexService::Search
           models.clear;
 
           locations = Location.within(
-            search[:distance_max] || search[:distance_unit] == :km ? 3.10686 : 5,
+            search[:distance_max] || search[:distance_unit] == :km ? 30 : 48.2803,
             :origin => [search[:latitude], search[:longitude]],
             :order => 'distance').limit(search[:per_page])
 

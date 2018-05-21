@@ -29,7 +29,6 @@
 #  given_name                         :string(255)
 #  family_name                        :string(255)
 #  display_name                       :string(255)
-#  phone_number                       :string(255)
 #  description                        :text(65535)
 #  image_file_name                    :string(255)
 #  image_content_type                 :string(255)
@@ -43,6 +42,20 @@
 #  deleted                            :boolean          default(FALSE)
 #  cloned_from                        :string(22)
 #  person_type                        :string(255)
+#  phone_number2                      :string(255)
+#  children_number                    :string(255)
+#  children_gender                    :string(255)
+#  children_age                       :string(255)
+#  children_need                      :string(255)
+#  phone_number1                      :string(255)
+#  grade_level                        :string(255)
+#  university_degree                  :string(255)
+#  university_name                    :string(255)
+#  arrest                             :string(255)
+#  convicted_felony                   :string(255)
+#  certificate_issue                  :datetime
+#  certificate_expiration             :datetime
+#  parent_contact_type                :string(255)
 #
 # Indexes
 #
@@ -148,7 +161,7 @@ class Person < ApplicationRecord
 
   serialize :preferences
 
-  validates_length_of :phone_number, :maximum => 25, :allow_nil => true, :allow_blank => true
+  validates_length_of :phone_number1, :maximum => 25, :allow_nil => true, :allow_blank => true
   validates_length_of :username, :within => 3..20
   validates_length_of :given_name, :within => 1..30, :allow_nil => true, :allow_blank => true
   validates_length_of :family_name, :within => 1..30, :allow_nil => true, :allow_blank => true
@@ -445,7 +458,7 @@ class Person < ApplicationRecord
   end
 
   def profile_info_empty?
-    (phone_number.nil? || phone_number.blank?) && (description.nil? || description.blank?) && location.nil?
+    (phone_number1.nil? || phone_number1.blank?) && (description.nil? || description.blank?) && location.nil?
   end
 
   def member_of?(community)
