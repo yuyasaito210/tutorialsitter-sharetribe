@@ -89,6 +89,7 @@
       .inline-label-container
         = form.label :children_need, t("settings.profile.special_needs_children"), :class => "inline"
       = form.text_field :children_need, :class => "text_field", :maxlength => "25"
+
     - elsif target_user[:person_type] == 'teacher'
       -# Current grade level
       .inline-label-container
@@ -97,6 +98,9 @@
 
       = form.label :certificate_image, t("settings.profile.certificate_picture")
       = form.file_field :certificate_image, :size => 30, :id => "avatar_file"
+
+      .people-image.certificate_image
+        = huge_certificate_thumb(target_user)
 
       .inline-label-container
         = form.label :certificate_issue, t("settings.profile.certificate_issue"), :class => "inline"
