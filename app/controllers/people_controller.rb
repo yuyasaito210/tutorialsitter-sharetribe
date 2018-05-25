@@ -234,7 +234,7 @@ class PeopleController < Devise::RegistrationsController
 
     begin
       person_params = person_update_params(params)
-
+      
       Maybe(person_params)[:location].each { |loc|
         person_params[:location] = loc.merge(location_type: :person)
       }
@@ -245,7 +245,7 @@ class PeopleController < Devise::RegistrationsController
         target_user.emails.build(address: new_email_address, community_id: @current_community.id)
       }
 
-      if target_user.update_attributes(person_params.except(:email_attributes))
+      if target_user.update_attributes(person_params.except(:email_attributes)) #
         if params[:person][:password]
           #if password changed Devise needs a new sign in.
           sign_in target_user, :bypass => true
@@ -390,7 +390,8 @@ class PeopleController < Devise::RegistrationsController
         :children_gender,
         :children_number,
         :children_need,
-        :grade_level,                       
+        :grade_level,  
+        :certificate_image,                     
         :university_degree,                  
         :university_name,                    
         :arrest,                            

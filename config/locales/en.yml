@@ -685,6 +685,7 @@ en:
     fields_that_are_mandatory: "Fields marked with star (*) are mandatory."
     or: or
     password: Password
+    profile: Profile
     service_name: "%{service_name}"
     share_types:
       request: request
@@ -2005,6 +2006,20 @@ en:
       contact: "Contact %{person}"
       about_me: "About me:"
       add_description: "Share something about yourself"
+      first_name: "Family name"
+      given_name: "Last name"
+      display_name: "Display name"
+      street_address: "Location"
+      children_number: "Children number"
+      children_gender: "Children gender"
+      children_age: "Children ages"
+      children_need: "Specific chidren need"
+      grade_level: "Grade level"
+      certificate_expiration: "Certificate expiration date"
+      university_name: "University name"
+      university_degree: "University degree"
+      parent_contact_type: "Parent contact type"
+      description: "About me"
       add_location: "Add location"
       add_phone_number: "Add phone number"
       address: "Location:"
@@ -2143,8 +2158,8 @@ en:
       display_name: "Display name"
       display_name_description: "If you represent an organisation, you can use its name as your display name. Display name is shown to other users instead of your first and last name."
       location_description: "You can provide either your street address or only a city or zip/postal code. It’s good to also add your country when adding your location. Examples: \"10117 Berlin, Germany\" or \"2000 Sand Hill Road, CA, USA\"."
-      phone_number1: "Phone number1"
-      phone_number2: "Phone number2, optional"
+      phone_number1: "Phone number 1"
+      phone_number2: "Phone number 2, optional"
       children_number: "Children Number"
       children_gender: "Children Gender"
       children_age: "Children Age"
@@ -2158,6 +2173,7 @@ en:
       convicted_felony: "Have you ever been convicted of a felony?"
       parent_contact_type: "Are you able to FaceTime of Skype with parents?"
       profile_picture: "Profile picture"
+      certificate_picture: "Certificate picture"
       postal_code: "Postal code"
       profile_page: "in your profile page"
       profilemap: Mapview

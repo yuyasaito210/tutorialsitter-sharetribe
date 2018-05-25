@@ -56,6 +56,11 @@
 #  certificate_issue                  :datetime
 #  certificate_expiration             :datetime
 #  parent_contact_type                :string(255)
+#  certificate_image_file_name        :string(255)
+#  certificate_image_content_type     :string(255)
+#  certificate_image_file_size        :integer
+#  certificate_image_updated_at       :datetime
+#  certificate_image_processing       :boolean
 #
 # Indexes
 #

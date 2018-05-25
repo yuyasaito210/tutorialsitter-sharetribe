@@ -95,6 +95,9 @@
         = form.label :grade_level, t("settings.profile.grade_level"), :class => "inline"
       = form.text_field :grade_level, :class => "text_field", :maxlength => "25"
 
+      = form.label :certificate_image, t("settings.profile.certificate_picture")
+      = form.file_field :certificate_image, :size => 30, :id => "avatar_file"
+
       .inline-label-container
         = form.label :certificate_issue, t("settings.profile.certificate_issue"), :class => "inline"
       .date_select_container

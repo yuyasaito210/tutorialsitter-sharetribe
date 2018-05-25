@@ -56,6 +56,11 @@
 #  certificate_issue                  :datetime
 #  certificate_expiration             :datetime
 #  parent_contact_type                :string(255)
+#  certificate_image_file_name        :string(255)
+#  certificate_image_content_type     :string(255)
+#  certificate_image_file_size        :integer
+#  certificate_image_updated_at       :datetime
+#  certificate_image_processing       :boolean
 #
 # Indexes
 #
@@ -99,6 +104,8 @@ class Person < ApplicationRecord
   # Virtual attribute for authenticating by either username or email
   # This is in addition to a real persisted field like 'username'
   attr_accessor :login
+
+  attr_accessor :certificate_image
 
   has_many :listings, -> { where(deleted: 0) }, :dependent => :destroy, :foreign_key => "author_id"
   has_many :emails, :dependent => :destroy, :inverse_of => :person
@@ -180,13 +187,29 @@ class Person < ApplicationRecord
                       :thumb => "48x48#",
                       :original => "600x800>"}
 
+  has_attached_file :certificate_image , :styles => {
+                      :medium => "288x288#",
+                      :small => "108x108#",
+                      :thumb => "48x48#",
+                      :original => "600x800>"}
+
   process_in_background :image
 
+  process_in_background :certificate_image
+  
+
   #validates_attachment_presence :image
+  #validates_attachment_presence :certificate_image
+
   validates_attachment_size :image, :less_than => 9.megabytes
   validates_attachment_content_type :image,
                                     :content_type => ["image/jpeg", "image/png", "image/gif",
                                       "image/pjpeg", "image/x-png"] #the two last types are sent by IE.
+
+  validates_attachment_size :certificate_image, :less_than => 9.megabytes
+  validates_attachment_content_type :certificate_image,
+                                    :content_type => ["image/jpeg", "image/png", "image/gif",
+                                      "image/pjpeg", "image/x-png"] #the two last types are sent by IE.                                    
 
   before_validation(:on => :create) do
     self.id = SecureRandom.urlsafe_base64
@@ -343,6 +366,11 @@ class Person < ApplicationRecord
     self.image = open(url)
     self.save
   end
+
+  # def certificate_from_url(url)
+  #   self.certificate_image = open(url)
+  #   self.save
+  # end
 
   def store_picture_from_facebook!()
     if self.facebook_id
@@ -555,6 +583,10 @@ class Person < ApplicationRecord
   # does not have a profile picture.
   def has_profile_picture?
     image_file_name.present?
+  end
+
+  def has_certificate_picture?
+    certificate_image_file_name.present?
   end
 
   # Tell Devise that email is not required

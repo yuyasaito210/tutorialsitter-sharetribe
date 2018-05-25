@@ -1192,6 +1192,11 @@ CREATE TABLE `people` (
   `certificate_issue` datetime DEFAULT NULL,
   `certificate_expiration` datetime DEFAULT NULL,
   `parent_contact_type` varchar(255) DEFAULT NULL,
+  `certificate_image_file_name` varchar(255) DEFAULT NULL,
+  `certificate_image_content_type` varchar(255) DEFAULT NULL,
+  `certificate_image_file_size` int(11) DEFAULT NULL,
+  `certificate_image_updated_at` datetime DEFAULT NULL,
+  `certificate_image_processing` tinyint(1) DEFAULT NULL,
   UNIQUE KEY `index_people_on_username_and_community_id` (`username`,`community_id`) USING BTREE,
   UNIQUE KEY `index_people_on_uuid` (`uuid`),
   UNIQUE KEY `index_people_on_email` (`email`) USING BTREE,
@@ -2283,6 +2288,8 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20180520191627'),
 ('20180520192143'),
 ('20180520204657'),
-('20180520210406');
+('20180520210406'),
+('20180525040313'),
+('20180525135045');
 
 

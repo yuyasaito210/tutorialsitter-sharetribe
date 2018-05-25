@@ -99,6 +99,14 @@ module ApplicationHelper
     image_tag image_url, { :alt => PersonViewUtils.person_display_name(person, @current_community) }.merge(options)
   end
 
+  # def huge_certificate_thumb(person, options={})
+  #   # FIXME! Need a new picture size: :large
+
+  #   image_url = person.certificate_image.present? ? person.certificate_image.url(:medium) : missing_avatar(:medium)
+
+  #   image_tag image_url, { :alt => PersonViewUtils.person_display_name(person, @current_community) }.merge(options)
+  # end
+
   def missing_avatar(size = :medium)
     case size.to_sym
     when :small
