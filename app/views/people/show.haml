@@ -15,29 +15,41 @@
         = render :partial => "profile_action_buttons"
     .row
       %h2.people-header.public_profile_title
-        = t(".first_name")
-        .public_profile_value
-          - if @person.family_name && !@person.family_name.blank?
-            - text_with_line_breaks do             
-              = @person.family_name      
-      %h2.people-header.public_profile_title
         = t(".given_name")
         .public_profile_value
           - if @person.given_name && !@person.given_name.blank?
             - text_with_line_breaks do             
-              = @person.given_name
+              = @person.given_name  
+          - elsif @person.given_name.blank?
+            - text_with_line_breaks do
+              = "No"    
+      %h2.people-header.public_profile_title
+        = t(".family_name")
+        .public_profile_value
+          - if @person.family_name && !@person.family_name.blank?
+            - text_with_line_breaks do             
+              = @person.family_name
+          - elsif @person.family_name.blank?
+            - text_with_line_breaks do
+              = "No"
       %h2.people-header.public_profile_title
         = t(".display_name")
         .public_profile_value
           - if @person.display_name && !@person.display_name.blank?
             - text_with_line_breaks do             
               = @person.display_name
+          - elsif @person.display_name.blank?
+            - text_with_line_breaks do
+              = "No"
       %h2.people-header.public_profile_title  
         = t(".street_address")
         .public_profile_value
           - if @person.street_address && !@person.street_address.blank?
             - text_with_line_breaks do             
-              = @person.street_address         
+              = @person.street_address
+          - elsif @person.street_address.blank?
+            - text_with_line_breaks do
+              = "No"        
       - if @person.person_type == "parent"
         %h2.people-header.public_profile_title  
           = t(".children_number")
@@ -45,24 +57,36 @@
             - if @person.children_number && !@person.children_number.blank?
               - text_with_line_breaks do             
                 = @person.children_number
+            - elsif @person.children_number.blank?
+              - text_with_line_breaks do
+                = "No"
         %h2.people-header.public_profile_title  
           = t(".children_gender")
           .public_profile_value
             - if @person.children_gender && !@person.children_gender.blank?
               - text_with_line_breaks do             
                 = @person.children_gender
+            - elsif @person.children_gender.blank?
+              - text_with_line_breaks do
+                = "No"
         %h2.people-header.public_profile_title  
           = t(".children_age")
           .public_profile_value
             - if @person.children_age && !@person.children_age.blank?
               - text_with_line_breaks do             
                 = @person.children_age
+            - elsif @person.children_age.blank?
+              - text_with_line_breaks do
+                = "No"
         %h2.people-header.public_profile_title  
           = t(".children_need")
           .public_profile_value
             - if @person.children_need && !@person.children_need.blank?
               - text_with_line_breaks do             
                 = @person.children_need
+            - elsif @person.children_need.blank?
+              - text_with_line_breaks do
+                = "No"
       - elsif @person.person_type == "teacher"
         %h2.people-header.public_profile_title
           = t(".grade_level")
@@ -70,6 +94,9 @@
             - if @person.grade_level && !@person.grade_level.blank?
               - text_with_line_breaks do             
                 = @person.grade_level
+            - elsif @person.grade_level.blank?
+              - text_with_line_breaks do
+                = "No"
         -# .people-image
         -#   = huge_certificate_thumb(@person)
         %h2.people-header.public_profile_title
@@ -78,53 +105,66 @@
             - if @person.certificate_expiration && !@person.certificate_expiration.blank?
               - text_with_line_breaks do             
                 = @person.certificate_expiration
+            - elsif @person.certificate_expiration.blank?
+              - text_with_line_breaks do
+                = "No"
         %h2.people-header.public_profile_title 
           = t(".university_name")
           .public_profile_value
             - if @person.university_name && !@person.university_name.blank?
               - text_with_line_breaks do             
                 = @person.university_name
+            - elsif @person.university_name.blank?
+              - text_with_line_breaks do
+                = "No"
         %h2.people-header.public_profile_title  
           = t(".university_degree")
           .public_profile_value
             - if @person.university_degree && !@person.university_degree.blank?
               - text_with_line_breaks do             
                 = @person.university_degree
+            - elsif @person.university_degree.blank?
+              - text_with_line_breaks do
+                = "No"
         %h2.people-header.public_profile_title  
           = t(".parent_contact_type")
           .public_profile_value
             - if @person.parent_contact_type && !@person.parent_contact_type.blank?
               - text_with_line_breaks do             
                 = @person.parent_contact_type
-        %h2.people-header.public_profile_title  
-          = t(".description")        
-          .public_profile_value
-            - if @person.description && !@person.description.blank?
-              - text_with_line_breaks do             
-                = @person.description
-            - elsif current_user?(@person)
-              %a{href: person_settings_path(@person)}
-                .icon-with-text-container
-                  .ss-chat.icon-part
-                  .ss.text-part= t(".add_description")
+            - elsif @person.parent_contact_type.blank?
+              - text_with_line_breaks do
+                = "No"
+      %h2.people-header.public_profile_title  
+        = t(".description")        
+        .public_profile_value
+          - if @person.description && !@person.description.blank?
+            - text_with_line_breaks do             
+              = @person.description
+          - elsif current_user?(@person)
+            %a{href: person_settings_path(@person)}
+              .icon-with-text-container
+                .ss-chat.icon-part
+                .ss.text-part= t(".add_description")
     .row
-      %h2.people-header
-        - if listings.total_entries > 0
-          - if current_user?(@person) && params[:show_closed]
-            = pluralize(listings.total_entries, t(".listing"), t(".listings"))
-          - else
-            = pluralize(listings.total_entries, t(".open_listing"), t(".open_listings"))
-        - else
-          - if current_user?(@person) && params[:show_closed]
-            = t(".no_listings")
-          - else
-            = t(".no_open_listings")
-        %span.people-show-closed-link
-          - if current_user?(@person)
-            - if params[:show_closed]
-              = link_to t("people.profile_listings.show_only_open"), person_path(@person)
+      - if @person.person_type == "teacher"
+        %h2.people-header
+          - if listings.total_entries > 0
+            - if current_user?(@person) && params[:show_closed]
+              = pluralize(listings.total_entries, t(".listing"), t(".listings"))
             - else
-              = link_to t("people.profile_listings.show_also_closed"), person_path(@person, :show_closed => true)
+              = pluralize(listings.total_entries, t(".open_listing"), t(".open_listings"))
+          - else
+            - if current_user?(@person) && params[:show_closed]
+              = t(".no_listings")
+            - else
+              = t(".no_open_listings")
+          %span.people-show-closed-link
+            - if current_user?(@person)
+              - if params[:show_closed]
+                = link_to t("people.profile_listings.show_only_open"), person_path(@person)
+              - else
+                = link_to t("people.profile_listings.show_also_closed"), person_path(@person, :show_closed => true)
 
     #profile-listings-list
       - limit = 6
