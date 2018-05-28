@@ -13,7 +13,8 @@ module DeletePerson
           person.update_attributes(
             given_name: nil,
             family_name: nil,
-            phone_number: nil,
+            phone_number1: nil,
+            phone_number2: nil,
             description: nil,
             facebook_id: nil,
             # To ensure user can not log in anymore we have to:
