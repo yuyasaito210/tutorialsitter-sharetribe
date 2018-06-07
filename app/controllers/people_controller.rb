@@ -391,6 +391,7 @@ class PeopleController < Devise::RegistrationsController
         :children_number,
         :children_need,
         :grade_level,  
+        :subject_matter,
         :certificate_image,                     
         :university_degree,                  
         :university_name,                    

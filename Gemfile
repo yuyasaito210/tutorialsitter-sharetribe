@@ -23,6 +23,7 @@ gem 'sass', '~> 3.4.24'
 gem 'rack-attack', '~> 5.0.1'
 gem 'rest-client', '~> 2.0.2'
 
+gem 'pdf_cover', '~> 0.2.4'
 gem 'paperclip', '~> 5.2.1'
 gem 'delayed_paperclip', '~> 3.0.1'
 

@@ -61,6 +61,7 @@
 #  certificate_image_file_size        :integer
 #  certificate_image_updated_at       :datetime
 #  certificate_image_processing       :boolean
+#  subject_matter                     :string(255)
 #
 # Indexes
 #
@@ -87,6 +88,7 @@ class Person < ApplicationRecord
   include ErrorsHelper
   include ApplicationHelper
   include DeletePerson
+  include PdfCover
 
   self.primary_key = "id"
 
@@ -186,20 +188,38 @@ class Person < ApplicationRecord
                       :small => "108x108#",
                       :thumb => "48x48#",
                       :original => "600x800>"}
-
+ 
   has_attached_file :certificate_image , :styles => {
                       :medium => "288x288#",
                       :small => "108x108#",
                       :thumb => "48x48#",
                       :original => "600x800>"}
 
+  # has_attached_file :certificate_image,
+  #   styles: lambda { |attachment|
+  #     styles = {}
+  #     if attachment.content_type =~ /application.pdf/
+  #       styles[:thumb] = {
+  #         geometry: "800x800#",
+  #         format: :jpg
+  #       }
+  #       styles[:medium] = {
+  #         geometry: "1920x1920>",
+  #         format: :jpg
+  #       }
+  #       styles[:original] = {
+  #         format: :jpg,
+  #         source_file_options: lambda { |a| "-quality 100 -density 400" }
+  #       }
+  #     else
+  #       styles = {thumb: "800x800#", drawingboard: "1920x1920>"}
+  #     end
+  #     styles
+	# }
+
   process_in_background :image
 
   process_in_background :certificate_image
-  
-
-  #validates_attachment_presence :image
-  #validates_attachment_presence :certificate_image
 
   validates_attachment_size :image, :less_than => 9.megabytes
   validates_attachment_content_type :image,
@@ -207,9 +227,13 @@ class Person < ApplicationRecord
                                       "image/pjpeg", "image/x-png"] #the two last types are sent by IE.
 
   validates_attachment_size :certificate_image, :less_than => 9.megabytes
+
+  # pdf_cover_attachment :pdf, styles: { pdf_cover: ['', :jpeg]},
+  #                     convert_options: { all: '-quality 95 -density 300' }
+
   validates_attachment_content_type :certificate_image,
-                                    :content_type => ["image/jpeg", "image/png", "image/gif",
-                                      "image/pjpeg", "image/x-png"] #the two last types are sent by IE.                                    
+                                    :content_type => ["image/jpeg", "image/png", "image/gif", "application/pdf", 
+                                      "image/pjpeg", "image/x-png"] #the two last types are sent by IE.       
 
   before_validation(:on => :create) do
     self.id = SecureRandom.urlsafe_base64

@@ -91,10 +91,15 @@
       = form.text_field :children_need, :class => "text_field", :maxlength => "25"
 
     - elsif target_user[:person_type] == 'teacher'
-      -# Current grade level
+      -# Grade Level Experience
       .inline-label-container
         = form.label :grade_level, t("settings.profile.grade_level"), :class => "inline"
       = form.text_field :grade_level, :class => "text_field", :maxlength => "25"
+
+      -# Subject Matter Experience
+      .inline-label-container
+        = form.label :subject_matter, t("settings.profile.subject_matter"), :class => "inline"
+      = form.text_field :subject_matter, :class => "text_field", :maxlength => "25"
 
       = form.label :certificate_image, t("settings.profile.certificate_picture")
       = form.file_field :certificate_image, :size => 30, :id => "avatar_file"

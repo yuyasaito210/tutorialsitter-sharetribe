@@ -99,15 +99,15 @@
                 = "No"
         -# .people-image
         -#   = huge_certificate_thumb(@person)
-        %h2.people-header.public_profile_title
-          = t(".certificate_expiration")
-          .public_profile_value
-            - if @person.certificate_expiration && !@person.certificate_expiration.blank?
-              - text_with_line_breaks do             
-                = @person.certificate_expiration
-            - elsif @person.certificate_expiration.blank?
-              - text_with_line_breaks do
-                = "No"
+        -# %h2.people-header.public_profile_title
+        -#   = t(".certificate_expiration")
+        -#   .public_profile_value
+        -#     - if @person.certificate_expiration && !@person.certificate_expiration.blank?
+        -#       - text_with_line_breaks do             
+        -#         = @person.certificate_expiration
+        -#     - elsif @person.certificate_expiration.blank?
+        -#       - text_with_line_breaks do
+        -#         = "No"
         %h2.people-header.public_profile_title 
           = t(".university_name")
           .public_profile_value
@@ -126,15 +126,15 @@
             - elsif @person.university_degree.blank?
               - text_with_line_breaks do
                 = "No"
-        %h2.people-header.public_profile_title  
-          = t(".parent_contact_type")
-          .public_profile_value
-            - if @person.parent_contact_type && !@person.parent_contact_type.blank?
-              - text_with_line_breaks do             
-                = @person.parent_contact_type
-            - elsif @person.parent_contact_type.blank?
-              - text_with_line_breaks do
-                = "No"
+        -# %h2.people-header.public_profile_title  
+        -#   = t(".parent_contact_type")
+        -#   .public_profile_value
+        -#     - if @person.parent_contact_type && !@person.parent_contact_type.blank?
+        -#       - text_with_line_breaks do             
+        -#         = @person.parent_contact_type
+        -#     - elsif @person.parent_contact_type.blank?
+        -#       - text_with_line_breaks do
+        -#         = "No"
       %h2.people-header.public_profile_title  
         = t(".description")        
         .public_profile_value
@@ -170,8 +170,8 @@
       - limit = 6
       = render :partial => 'listings/profile_listings', :locals => {person: @person, limit: limit, listings: listings}
 
-    - if @current_community.follow_in_use?
-      = render :partial => "followed_people", :locals => { person: @person, followed_people: followed_people, limit: 6 }
+    -# - if @current_community.follow_in_use?
+    -#   = render :partial => "followed_people", :locals => { person: @person, followed_people: followed_people, limit: 6 }
 
     #people-testimonials.listing-main
       .row
