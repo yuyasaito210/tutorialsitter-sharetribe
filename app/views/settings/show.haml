@@ -110,11 +110,11 @@
       .inline-label-container
         = form.label :certificate_issue, t("settings.profile.certificate_issue"), :class => "inline"
       .date_select_container
-      = form.date_select :certificate_issue, :class => "inline"
+      = form.date_select :certificate_issue, :include_blank => true, :class => "inline"
 
       .inline-label-container
         = form.label :certificate_expiration, t("settings.profile.certificate_expiration"), :class => "inline"
-      = form.date_select :certificate_expiration, :class => "inline"
+      = form.date_select :certificate_expiration, :include_blank => true, :class => "inline"
 
       -# Degrees obtained in College 
       .inline-label-container
