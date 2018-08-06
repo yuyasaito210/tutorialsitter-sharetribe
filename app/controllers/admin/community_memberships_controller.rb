@@ -115,6 +115,7 @@ class Admin::CommunityMembershipsController < Admin::AdminBaseController
       image_file_name
       facebook_id
       person_type
+      age
       grade_level
       university_degree
       university_name
@@ -150,6 +151,7 @@ class Admin::CommunityMembershipsController < Admin::AdminBaseController
           user.image_file_name,
           user.facebook_id,
           user.person_type,
+          user.age,
           user.grade_level,
           user.university_degree,
           user.university_name,
