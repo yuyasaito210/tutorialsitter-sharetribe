@@ -101,7 +101,8 @@ class Admin::CommunityMembershipsController < Admin::AdminBaseController
       last_name
       display_name
       username
-      phone_number
+      phone_number1
+      phone_number2
       address
       email_address
       email_address_confirmed
@@ -110,6 +111,23 @@ class Admin::CommunityMembershipsController < Admin::AdminBaseController
       is_admin
       accept_emails_from_admin
       language
+      description
+      image_file_name
+      facebook_id
+      person_type
+      grade_level
+      university_degree
+      university_name
+      arrest
+      convicted_felony
+      parent_contact_type
+      certificate_issue
+      certificate_expiration
+      certificate_image_file_name
+      certificate_image_content_type
+      certificate_image_file_size
+      certificate_image_updated_at
+      subject_matter
     }
     header_row.push("can_post_listings") if community.require_verification_to_post_listings
     yielder << header_row.to_csv(force_quotes: true)
@@ -121,12 +139,30 @@ class Admin::CommunityMembershipsController < Admin::AdminBaseController
           user.family_name,
           user.display_name,
           user.username,
-          user.phone_number,
+          user.phone_number1,
+          user.phone_number2,
           user.location ? user.location.address : "",
           membership.created_at,
           membership.status,
           membership.admin,
-          user.locale
+          user.locale,
+          user.description,
+          user.image_file_name,
+          user.facebook_id,
+          user.person_type,
+          user.grade_level,
+          user.university_degree,
+          user.university_name,
+          user.arrest,
+          user.convicted_felony,
+          user.parent_contact_type,
+          user.certificate_issue,
+          user.certificate_expiration,
+          user.certificate_image_file_name,
+          user.certificate_image_content_type,
+          user.certificate_image_file_size,
+          user.certificate_image_updated_at,
+          user.subject_matter
         ]
         user_data.push(membership.can_post_listings) if community.require_verification_to_post_listings
         user.emails.each do |email|
