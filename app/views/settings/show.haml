@@ -91,6 +91,10 @@
       = form.text_field :children_need, :class => "text_field", :maxlength => "25"
 
     - elsif target_user[:person_type] == 'teacher'
+      -# Age
+      .inline-label-container
+        = form.label :age, t("settings.profile.age"), :class => "inline"
+      = form.text_field :age, :class => "text_field", :maxlength => "25"
       -# Grade Level Experience
       .inline-label-container
         = form.label :grade_level, t("settings.profile.grade_level"), :class => "inline"

@@ -62,6 +62,7 @@
 #  certificate_image_updated_at       :datetime
 #  certificate_image_processing       :boolean
 #  subject_matter                     :string(255)
+#  age                                :integer
 #
 # Indexes
 #

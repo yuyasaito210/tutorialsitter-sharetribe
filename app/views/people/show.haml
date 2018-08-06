@@ -89,6 +89,15 @@
                 = "No"
       - elsif @person.person_type == "teacher"
         %h2.people-header.public_profile_title
+          = t(".age")
+          .public_profile_value
+            - if @person.age && !@person.age.blank?
+              - text_with_line_breaks do
+                = @person.age
+            - elsif @person.age.blank?
+              - text_with_line_breaks do
+                = "No"            
+        %h2.people-header.public_profile_title
           = t(".grade_level")
           .public_profile_value
             - if @person.grade_level && !@person.grade_level.blank?

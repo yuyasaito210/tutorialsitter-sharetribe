@@ -390,6 +390,7 @@ class PeopleController < Devise::RegistrationsController
         :children_gender,
         :children_number,
         :children_need,
+        :age,
         :grade_level,  
         :subject_matter,
         :certificate_image,                     

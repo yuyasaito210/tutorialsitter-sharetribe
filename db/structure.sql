@@ -1198,6 +1198,7 @@ CREATE TABLE `people` (
   `certificate_image_updated_at` datetime DEFAULT NULL,
   `certificate_image_processing` tinyint(1) DEFAULT NULL,
   `subject_matter` varchar(255) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
   UNIQUE KEY `index_people_on_username_and_community_id` (`username`,`community_id`) USING BTREE,
   UNIQUE KEY `index_people_on_uuid` (`uuid`),
   UNIQUE KEY `index_people_on_email` (`email`) USING BTREE,
@@ -2292,6 +2293,7 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20180520210406'),
 ('20180525040313'),
 ('20180525135045'),
-('20180606133639');
+('20180606133639'),
+('20180806134030');
 
 
