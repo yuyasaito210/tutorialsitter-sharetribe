@@ -30,7 +30,7 @@ class CreateMemberEmailBatchJob < Struct.new(:sender_id, :community_id, :content
       when :all_teachers
         teacher_person_ids(community)
       when :all_parents
-        parent_person_ids(community)        
+        parents_person_ids(community)        
       when :with_listing
         has_listings_person_ids(community)
       when :with_listing_no_payment
