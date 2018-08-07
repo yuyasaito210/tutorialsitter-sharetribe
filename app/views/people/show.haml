@@ -24,15 +24,6 @@
             - text_with_line_breaks do
               = "No"    
       %h2.people-header.public_profile_title
-        = t(".family_name")
-        .public_profile_value
-          - if @person.family_name && !@person.family_name.blank?
-            - text_with_line_breaks do             
-              = @person.family_name
-          - elsif @person.family_name.blank?
-            - text_with_line_breaks do
-              = "No"
-      %h2.people-header.public_profile_title
         = t(".display_name")
         .public_profile_value
           - if @person.display_name && !@person.display_name.blank?

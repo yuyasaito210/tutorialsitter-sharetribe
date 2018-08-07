@@ -27,6 +27,10 @@ class CreateMemberEmailBatchJob < Struct.new(:sender_id, :community_id, :content
       case mode
       when :all_users
         community.members.map(&:id)
+      when :all_teachers
+        teacher_person_ids(community)
+      when :all_parents
+        parent_person_ids(community)        
       when :with_listing
         has_listings_person_ids(community)
       when :with_listing_no_payment
@@ -43,6 +47,14 @@ class CreateMemberEmailBatchJob < Struct.new(:sender_id, :community_id, :content
     else
       []
     end
+  end
+
+  def teacher_person_ids(community)
+    community.members.where(person_type: 'teacher').distinct.map(&:id)
+  end
+
+  def parents_person_ids(community)
+    community.members.where(person_type: 'parent').distinct.map(&:id)
   end
 
   def paypal_person_ids(community)
